@@ -6,9 +6,9 @@
 
 
 # Package Status
-This package now supports Laravel version 10
+This package now supports Laravel version 11
 
-# Laratables (Laravel 5.5 to Laravel 10.x)
+# Laratables (Laravel 5.5 to Laravel 11.x)
 A Laravel package to handle server side ajax of [Datatables](https://datatables.net).
 
 ## Table of contents
