@@ -83,6 +83,8 @@ There are multiple ways to customize query/data/logic. Check [Customization](#cu
 ## Requirements
 | PHP    | Laravel | Package |
 |--------|---------|---------|
+| 8.2+   | 11.x    | v11.0.0 |
+| 8.1+   | 10.x    | v10.0.0 |
 | 8.0+   | 9.x     | v2.5.0  |
 | 7.3+   | 8.x     | v2.4.0  |
 | 7.2.5+ | 7.x     | v2.3.0  |
