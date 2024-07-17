@@ -78,6 +78,7 @@ There are multiple ways to customize query/data/logic. Check [Customization](#cu
 4. https://github.com/freshbitsweb/laratables-demo-many-to-many
 5. https://github.com/freshbitsweb/laratables-demo-one-to-many-polymorphic
 6. https://github.com/freshbitsweb/laratables-demo-one-to-one
+7. https://github.com/laratables/samples (for laravel v10)
 
 
 ## Requirements
