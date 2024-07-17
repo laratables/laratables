@@ -3,7 +3,7 @@
     "description": "Ajax support of DataTables for Laravel 5.5+ to v11",
     "require": {
         "php": "^8.2|^8.3",
-        "illuminate/support": "^11.0",
+        "illuminate/support": "^11.0"
     },
     "require-dev": {
         "orchestra/testbench": "^9.0.0",
