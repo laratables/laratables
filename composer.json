@@ -1,14 +1,13 @@
 {
     "name": "laratables/laratables",
-    "description": "Ajax support of DataTables for Laravel 5.5+ to v11",
+    "description": "Ajax support of DataTables for Laravel 5.5+ to v12+",
     "require": {
-        "php": "^8.2|^8.3",
-        "illuminate/support": "^11.0"
+        "php": "^8.2",
+        "illuminate/support": "^11.0|^12.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^9.0.0",
-        "phpunit/phpunit": "^11.0.0",
-        "laravel/legacy-factories": "^1.4.0"
+        "orchestra/testbench": "^9.0|^10.0",
+        "phpunit/phpunit": "^11.0.0"
     },
     "license": "MIT",
     "authors": [
