@@ -6,9 +6,9 @@
 
 
 # Package Status
-This package now supports Laravel version 11
+This package now supports Laravel version 12
 
-# Laratables (Laravel 5.5 to Laravel 11.x)
+# Laratables (Laravel 5.5 to Laravel 12.x)
 A Laravel package to handle server side ajax of [Datatables](https://datatables.net).
 
 ## Table of contents
@@ -79,11 +79,13 @@ There are multiple ways to customize query/data/logic. Check [Customization](#cu
 5. https://github.com/freshbitsweb/laratables-demo-one-to-many-polymorphic
 6. https://github.com/freshbitsweb/laratables-demo-one-to-one
 7. https://github.com/laratables/samples (for laravel v10)
+8. https://github.com/laratables/laravel-11-sample (for laravel v11)
 
 
 ## Requirements
 | PHP    | Laravel | Package |
 |--------|---------|---------|
+| 8.2+   | 12.x    | v12.0.0 |
 | 8.2+   | 11.x    | v11.0.0 |
 | 8.1+   | 10.x    | v10.0.0 |
 | 8.0+   | 9.x     | v2.5.0  |
@@ -95,7 +97,7 @@ There are multiple ways to customize query/data/logic. Check [Customization](#cu
 ## Installation
 Install the package by running this command in your terminal/cmd:
 ```bash
-composer require freshbitsweb/laratables
+composer require laratables/laratables
 ```
 
 Optionally, you can import config file by running this command in your terminal/cmd:
