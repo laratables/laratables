@@ -6,9 +6,9 @@
 
 
 # Package Status
-This package now supports Laravel version 12
+This package now supports Laravel version 13
 
-# Laratables (Laravel 5.5 to Laravel 12.x)
+# Laratables (Laravel 5.5 to Laravel 13.x)
 A Laravel package to handle server side ajax of [Datatables](https://datatables.net).
 
 ## Table of contents
@@ -85,6 +85,7 @@ There are multiple ways to customize query/data/logic. Check [Customization](#cu
 ## Requirements
 | PHP    | Laravel | Package |
 |--------|---------|---------|
+| 8.3+   | 13.x    | v13.0.0 |
 | 8.2+   | 12.x    | v12.0.0 |
 | 8.2+   | 11.x    | v11.0.0 |
 | 8.1+   | 10.x    | v10.0.0 |
