@@ -2,9 +2,11 @@
 
 namespace Freshbitsweb\Laratables\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
+
 class RelationshipTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_returns_the_relationship_column_value()
     {
         $users = $this->createUsers();
@@ -23,7 +25,7 @@ class RelationshipTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_uses_the_custom_relationship_query()
     {
         $users = $this->createUsers();

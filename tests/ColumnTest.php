@@ -3,10 +3,11 @@
 namespace Freshbitsweb\Laratables\Tests;
 
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Test;
 
 class ColumnTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_returns_the_custom_column_value()
     {
         $users = $this->createUsers();
@@ -24,7 +25,7 @@ class ColumnTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_the_customized_column_value()
     {
         $users = $this->createUsers();
@@ -42,7 +43,7 @@ class ColumnTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_loads_additional_columns()
     {
         $users = $this->createUsers();
@@ -60,7 +61,7 @@ class ColumnTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_converts_carbon_to_dates()
     {
         $users = $this->createUsers();

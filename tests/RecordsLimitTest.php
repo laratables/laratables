@@ -2,9 +2,11 @@
 
 namespace Freshbitsweb\Laratables\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
+
 class RecordsLimitTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_limit_records_to_maximum_as_per_the_configuration()
     {
         $users = $this->createUsers(2);
@@ -18,7 +20,7 @@ class RecordsLimitTest extends TestCase
         $response->assertJsonCount(1, 'data');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_allow_unlimited_records_as_per_the_configuration()
     {
         $users = $this->createUsers(50);
@@ -32,7 +34,7 @@ class RecordsLimitTest extends TestCase
         $response->assertJsonCount(50, 'data');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_limit_records_based_on_the_request_even_when_unlimited_records_are_allowed()
     {
         $users = $this->createUsers(50);
@@ -46,7 +48,7 @@ class RecordsLimitTest extends TestCase
         $response->assertJsonCount(20, 'data');
     }
 
-    /** @test */
+    #[Test]
     public function it_prioritizes_request_limit_compared_to_configuration_limit()
     {
         $users = $this->createUsers(50);

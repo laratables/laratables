@@ -3,10 +3,11 @@
 namespace Freshbitsweb\Laratables\Tests;
 
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Test;
 
 class SearchTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_applies_the_search_as_per_the_custom_method()
     {
         $randomString = Str::random(20);
@@ -36,7 +37,7 @@ class SearchTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_applies_the_search_to_searchable_columns()
     {
         $randomString = Str::random(20);
@@ -65,7 +66,7 @@ class SearchTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_skips_non_searchable_columns_during_the_search()
     {
         $users = $this->createUsers();

@@ -2,9 +2,10 @@
 
 namespace Freshbitsweb\Laratables\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 class DataTableAttributesTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_returns_the_simple_data_as_expected()
     {
         $users = $this->createUsers();

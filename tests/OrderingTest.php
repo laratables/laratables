@@ -2,9 +2,11 @@
 
 namespace Freshbitsweb\Laratables\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
+
 class OrderingTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_orders_the_records_as_expected()
     {
         $user1 = $this->createUsers(
@@ -42,7 +44,7 @@ class OrderingTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_orders_the_records_as_per_custom_ordering()
     {
         $user1 = $this->createUsers(
@@ -92,7 +94,7 @@ class OrderingTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_orders_the_records_with_order_by_raw()
     {
         $user1 = $this->createUsers(
@@ -144,7 +146,7 @@ class OrderingTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_orders_the_records_by_multi_column_order()
     {
         $user1 = $this->createUsers(
