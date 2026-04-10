@@ -18,31 +18,48 @@ if (! function_exists('isRelationColumn')) {
 if (! function_exists('getRelationDetails')) {
     /**
      * Returns the relation details from the specified column.
+     * Supports nested relations like "company.address.city".
      *
-     * @param string Name of the column
-     * @return array
+     * @param string $columnName Name of the column (e.g., "company.address.city")
+     * @return array [relationPath, columnName] (e.g., ["company.address", "city"])
      */
     function getRelationDetails($columnName)
     {
-        $relationName = strtok($columnName, '.');
-        $relationColumnName = strtok('.');
+        $lastDotPosition = strrpos($columnName, '.');
 
-        return [$relationName, $relationColumnName];
+        $relationPath = substr($columnName, 0, $lastDotPosition);
+        $relationColumnName = substr($columnName, $lastDotPosition + 1);
+
+        return [$relationPath, $relationColumnName];
     }
 }
 
 if (! function_exists('getRelationName')) {
     /**
-     * Returns the name of the relation for the column specified.
+     * Returns the full relation path for the column specified.
+     * Used for eager loading with ->with().
      *
-     * @param string Name of the column
-     * @return string
+     * @param string $columnName Name of the column (e.g., "company.address.city")
+     * @return string Relation path (e.g., "company.address")
      */
     function getRelationName($columnName)
     {
-        [$relationName, $relationColumnName] = getRelationDetails($columnName);
+        [$relationPath, $relationColumnName] = getRelationDetails($columnName);
 
-        return $relationName;
+        return $relationPath;
+    }
+}
+
+if (! function_exists('getFirstRelationName')) {
+    /**
+     * Returns just the first relation name for foreign key selection.
+     *
+     * @param string $columnName Name of the column (e.g., "company.address.city")
+     * @return string First relation name (e.g., "company")
+     */
+    function getFirstRelationName($columnName)
+    {
+        return strtok($columnName, '.');
     }
 }
 

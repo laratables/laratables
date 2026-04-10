@@ -111,24 +111,36 @@ class RecordsTransformer
 
     /**
      * Returns the value of relation table column.
+     * Supports nested relations like "company.address.city".
      *
-     * @param string Name of the column
-     * @param \Illuminate\Database\Eloquent\Model Eloquent object
+     * @param string $columnName Name of the column
+     * @param \Illuminate\Database\Eloquent\Model $record Eloquent object
      * @return string
      */
     protected function getRelationColumnValue($columnName, $record)
     {
-        [$relationName, $relationColumnName] = getRelationDetails($columnName);
+        [$relationPath, $relationColumnName] = getRelationDetails($columnName);
 
-        if ($methodName = $this->customizesColumnValue($relationName.'_'.$relationColumnName)) {
+        // Check for custom column value method using underscores
+        // e.g., "company.address.city" -> "laratablesCompanyAddressCity"
+        $methodSearchName = str_replace('.', '_', $relationPath).'_'.$relationColumnName;
+        if ($methodName = $this->customizesColumnValue($methodSearchName)) {
             return $this->class::$methodName($record);
         }
 
-        if ($record->$relationName) {
-            return $record->$relationName->$relationColumnName;
+        // Traverse the nested relations
+        $relationParts = explode('.', $relationPath);
+        $value = $record;
+
+        foreach ($relationParts as $part) {
+            if ($value === null || ! $value->$part) {
+                return 'N/A';
+            }
+            $value = $value->$part;
         }
 
-        return 'N/A';
+        // Finally get the column value
+        return $value->$relationColumnName ?? 'N/A';
     }
 
     /**

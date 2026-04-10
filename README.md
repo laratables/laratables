@@ -24,6 +24,7 @@ A Laravel package to handle server side ajax of [Datatables](https://datatables.
         * [Joining related tables to the query](#joining-related-tables-to-the-query)
     * [Custom columns](#custom-columns)
     * [Relationship columns](#relationship-columns)
+        * [Nested relationships](#nested-relationships)
     * [Customizing column values](#customizing-column-values)
     * [Searching](#searching)
     * [Ordering (Sorting)](#ordering-sorting)
@@ -227,7 +228,94 @@ columns: [
 
 Ordering records by a relationship column is not supported in Laravel as main table records are fetched first and another query is fired to fetch related table records. Therefore, you should always keep your relationship table columns to be `orderable: false`.
 
-**Note** - The package does not support [nested relationships](https://github.com/freshbitsweb/laratables/issues/6) yet. You can utilize the custom column feature to get the nested relationship data but make sure that you [eager load](https://github.com/freshbitsweb/laratables#controlling-the-query) the relationship records.
+#### Nested relationships
+
+The package supports nested relationships using dot notation. For example, if a `User` belongs to a `Company` which has an `Address`, you can display the city like this:
+
+```js
+columns: [
+    ...
+    { name: 'company.address.city', orderable: false, searchable: false },
+    ...
+],
+```
+
+The package will automatically:
+- Eager load the nested relationships (`company.address`)
+- Traverse the relationship chain to get the column value
+- Apply `whereHas` with the full relationship path when searching
+
+**Searching nested relationships:**
+
+To make a nested relationship column searchable, you can either set `searchable: true` in the column configuration, or add it to the `laratablesSearchableColumns()` method if you want to search without displaying the column:
+
+```php
+/**
+ * Additional searchable columns including nested relationships.
+ *
+ * @return array
+ */
+public static function laratablesSearchableColumns()
+{
+    return ['company.address.city'];
+}
+```
+
+**Custom search for nested relationships:**
+
+You can customize the search behavior for nested relationships by adding a static method with underscores replacing dots:
+
+```php
+/**
+ * Custom search for company.address.city column.
+ *
+ * @param \Illuminate\Database\Eloquent\Builder $query
+ * @param string $searchValue
+ * @return \Illuminate\Database\Eloquent\Builder
+ */
+public static function laratablesSearchCompanyAddressCity($query, $searchValue)
+{
+    return $query->orWhereHas('company.address', function ($q) use ($searchValue) {
+        $q->where('city', 'like', "%{$searchValue}%")
+          ->orWhere('postal_code', 'like', "%{$searchValue}%");
+    });
+}
+```
+
+**Custom column value for nested relationships:**
+
+Similarly, you can customize the displayed value:
+
+```php
+/**
+ * Custom value for company.address.city column.
+ *
+ * @param \App\User $user
+ * @return string
+ */
+public static function laratablesCompanyAddressCity($user)
+{
+    return $user->company?->address?->city ?? 'No address';
+}
+```
+
+**Custom relationship query for nested relationships:**
+
+You can control the eager loading query for nested relationships:
+
+```php
+/**
+ * Custom query for company.address relationship.
+ *
+ * @return callable
+ */
+public static function laratablesCompanyAddressRelationQuery()
+{
+    return function ($query) {
+        $query->select('id', 'company_id', 'city', 'street', 'postal_code');
+    };
+}
+```
 
 **[⬆ back to top](#table-of-contents)**
 

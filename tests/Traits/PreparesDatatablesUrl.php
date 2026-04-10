@@ -29,9 +29,11 @@ trait PreparesDatatablesUrl
         return $columns->map(function ($column, $index) use ($extraColumns) {
             $searchable = $orderable = true;
 
-            $extraColumns = array_merge($extraColumns, ['action', 'country.name']);
+            // Relation columns and custom columns are not searchable/orderable by default
+            $nonSearchableColumns = array_merge($extraColumns, ['action', 'country.name']);
 
-            if (in_array($column, $extraColumns)) {
+            // Nested relation columns are also not orderable
+            if (in_array($column, $nonSearchableColumns) || substr_count($column, '.') > 1) {
                 $searchable = $orderable = false;
             }
 
