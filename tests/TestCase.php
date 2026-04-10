@@ -61,6 +61,8 @@ abstract class TestCase extends BaseTestCase
                 Route::get('/datatables-limit-1-record', 'DatatablesController@limit1Record');
                 Route::get('/datatables-no-limit', 'DatatablesController@noLimit');
                 Route::get('/datatables-max-limit-20', 'DatatablesController@maxLimit20');
+                Route::get('/datatables-nested-relation', 'DatatablesController@nestedRelation');
+                Route::get('/datatables-nested-searchable', 'DatatablesController@nestedSearchable');
             })
         ;
     }

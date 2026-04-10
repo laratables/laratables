@@ -73,11 +73,12 @@ class FilterAgent
 
     /**
      * Applies filter condition for the relation column.
+     * Supports nested relations like "company.address.city".
      *
-     * @param \Freshbitsweb\Laratables\QueryHandler Query object
-     * @param string Column name
-     * @param string Search string
-     * @return \Freshbitsweb\Laratables\QueryHandler Query object
+     * @param \Illuminate\Database\Query\Builder $query Query object
+     * @param string $column Column name
+     * @param string $searchValue Search string
+     * @return \Illuminate\Database\Query\Builder Query object
      */
     protected static function applyRelationFilter($query, $column, $searchValue)
     {
@@ -85,10 +86,12 @@ class FilterAgent
             return self::$class::$methodName($query, $searchValue);
         }
 
-        [$relationName, $relationColumnName] = getRelationDetails($column);
+        [$relationPath, $relationColumnName] = getRelationDetails($column);
         $searchValue = '%'.$searchValue.'%';
 
-        return $query->orWhereHas($relationName, function ($query) use ($relationColumnName, $searchValue) {
+        // Laravel's whereHas() supports nested relations via dot notation
+        // e.g., whereHas('company.address', ...) for company.address.city
+        return $query->orWhereHas($relationPath, function ($query) use ($relationColumnName, $searchValue) {
             $query->where($relationColumnName, 'like', "$searchValue");
         });
     }

@@ -13,6 +13,8 @@ use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomQuery;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserCustomSearch;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserLaratables;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserModifyCollection;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserNestedRelation;
+use Freshbitsweb\Laratables\Tests\Stubs\Models\UserNestedSearchable;
 use Freshbitsweb\Laratables\Tests\Stubs\Models\UserSearchableColumns;
 
 class DatatablesController
@@ -200,5 +202,25 @@ class DatatablesController
         config(['laratables.max_limit' => 20]);
 
         return Laratables::recordsOf(User::class);
+    }
+
+    /**
+     * Datatables return with nested relationship column.
+     *
+     * @return array
+     */
+    public function nestedRelation()
+    {
+        return Laratables::recordsOf(UserNestedRelation::class);
+    }
+
+    /**
+     * Datatables return with nested searchable relationship.
+     *
+     * @return array
+     */
+    public function nestedSearchable()
+    {
+        return Laratables::recordsOf(UserNestedSearchable::class);
     }
 }
